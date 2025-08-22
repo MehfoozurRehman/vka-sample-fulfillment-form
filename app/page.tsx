@@ -83,9 +83,8 @@ export default function Home() {
   const [applicationType, setApplicationType] = useState<ApplicationType | "">(
     ""
   );
-  const [foodMatrix, setFoodMatrix] = useState("");
-  const [healthMatrix, setHealthMatrix] = useState("");
-  const [nonFoodMatrix, setNonFoodMatrix] = useState("");
+  const [applicationDetail, setApplicationDetail] = useState("");
+  const [applicationSubDetail, setApplicationSubDetail] = useState("");
 
   const [processingConditions, setProcessingConditions] = useState<string[]>(
     []
@@ -115,9 +114,8 @@ export default function Home() {
       businessBrief,
       timeline,
       applicationType,
-      foodMatrix,
-      healthMatrix,
-      nonFoodMatrix,
+      applicationDetail,
+      applicationSubDetail,
       processingConditions,
       shelfLife,
       formatRequired,
@@ -259,9 +257,8 @@ export default function Home() {
                         type="button"
                         onClick={() => {
                           setApplicationType(t);
-                          setFoodMatrix("");
-                          setHealthMatrix("");
-                          setNonFoodMatrix("");
+                          setApplicationDetail("");
+                          setApplicationSubDetail("");
                         }}
                         className={`px-3 py-1 rounded-md border ${
                           applicationType === t
@@ -275,44 +272,65 @@ export default function Home() {
                   )}
                 </div>
               </label>
-
               {applicationType === "Food" && (
-                <label className="flex flex-col gap-2 sm:col-span-3">
-                  <span className="text-sm font-medium">
-                    Food Matrix (choose one)
-                  </span>
-                  <Select
-                    value={foodMatrix}
-                    onValueChange={(v) => setFoodMatrix(v)}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Select food category →" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {foodMatrixOptions.map((group) => (
-                        <SelectGroup key={group.label}>
-                          <SelectLabel>{group.label}</SelectLabel>
-                          {group.items.map((it) => (
-                            <SelectItem
-                              key={it}
-                              value={`${group.label} > ${it}`}
-                            >
-                              {group.label} — {it}
-                            </SelectItem>
-                          ))}
-                        </SelectGroup>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </label>
+                <>
+                  <label className="flex flex-col gap-2 sm:col-span-3">
+                    <span className="text-sm font-medium">
+                      Food Matrix (choose category)
+                    </span>
+                    <Select
+                      value={applicationDetail}
+                      onValueChange={(v) => {
+                        setApplicationDetail(v);
+                        setApplicationSubDetail("");
+                      }}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select food category →" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {foodMatrixOptions.map((group) => (
+                          <SelectItem key={group.label} value={group.label}>
+                            {group.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </label>
+
+                  {applicationDetail && (
+                    <label className="flex flex-col gap-2 sm:col-span-3">
+                      <span className="text-sm font-medium">
+                        Food Sub-Detail
+                      </span>
+                      <Select
+                        value={applicationSubDetail}
+                        onValueChange={(v) => setApplicationSubDetail(v)}
+                      >
+                        <SelectTrigger>
+                          <SelectValue placeholder="Select sub-category →" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          {foodMatrixOptions
+                            .find((g) => g.label === applicationDetail)
+                            ?.items.map((it) => (
+                              <SelectItem key={it} value={it}>
+                                {it}
+                              </SelectItem>
+                            ))}
+                        </SelectContent>
+                      </Select>
+                    </label>
+                  )}
+                </>
               )}
 
               {applicationType === "Health" && (
                 <label className="flex flex-col gap-2 sm:col-span-3">
                   <span className="text-sm font-medium">Health Matrix</span>
                   <Select
-                    value={healthMatrix}
-                    onValueChange={(v) => setHealthMatrix(v)}
+                    value={applicationDetail}
+                    onValueChange={(v) => setApplicationDetail(v)}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select" />
@@ -336,8 +354,8 @@ export default function Home() {
                 <label className="flex flex-col gap-2 sm:col-span-3">
                   <span className="text-sm font-medium">Non-Food Matrix</span>
                   <Select
-                    value={nonFoodMatrix}
-                    onValueChange={(v) => setNonFoodMatrix(v)}
+                    value={applicationDetail}
+                    onValueChange={(v) => setApplicationDetail(v)}
                   >
                     <SelectTrigger>
                       <SelectValue placeholder="Select" />
