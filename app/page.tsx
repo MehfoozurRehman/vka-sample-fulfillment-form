@@ -3,19 +3,17 @@
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useMemo, useState } from "react";
 
 import { Checkbox } from "@/components/ui/checkbox";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
+import { useState } from "react";
 
 type Timeline = "Urgent" | "Short-term" | "Medium-term" | "Long-term";
 
@@ -104,6 +102,7 @@ export default function Home() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     const payload = {
       company,
       contactName,
