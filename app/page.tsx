@@ -513,7 +513,7 @@ export default function Home() {
               <div className="sm:col-span-2">
                 <span className="text-sm font-medium">Documents Needed</span>
                 <div className="flex gap-2 mt-2 flex-wrap">
-                  {["TDS", "SDS", "Halal", "Kosher", "Other"].map((d) => (
+                  {["TDS", "SDS", "Product Spec"].map((d) => (
                     <label
                       key={d}
                       className="inline-flex items-center gap-2 px-3 py-1 rounded-md border"
