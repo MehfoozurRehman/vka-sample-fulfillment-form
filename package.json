@@ -24,8 +24,8 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^25.0.5",
-    "@types/react": "19.2.7",
+    "@types/node": "^25.0.7",
+    "@types/react": "19.2.8",
     "@types/react-dom": "19.2.3",
     "eslint": "^9",
     "eslint-config-next": "16.1.1",
@@ -35,7 +35,7 @@
   },
   "pnpm": {
     "overrides": {
-      "@types/react": "19.2.7",
+      "@types/react": "19.2.8",
       "@types/react-dom": "19.2.3"
     }
   }
